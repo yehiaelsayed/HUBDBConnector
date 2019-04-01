@@ -24,7 +24,11 @@ namespace HUBDBConnector.Utilities
             _connection.Close();
         }
 
-
+        /// <summary>
+        /// execute query and map query result to JObject dynamicly so you can map it to any model easily
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         public JArray ExcuteQuery(string query)
         {
             var command = new SqlCommand(query, _connection);

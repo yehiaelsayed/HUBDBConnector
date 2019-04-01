@@ -4,8 +4,9 @@ using System.Text;
 
 namespace HUBDBConnector.Model
 {
-    class AppLog
+    public class AppLog
     {
+        int Id { get; set; }
         public DateTime LastRunDate { get; set; }
     }
 }

@@ -6,29 +6,34 @@ using System.Text;
 
 namespace HUBDBConnector.Utilities
 {
-    public class Logger
+    /// <summary>
+    /// Flat file data storage [json format] and it supports all linq query 
+    /// </summary>
+    public static class Logger
     {
-        private DataStore _jsonDataStore { get; set; }
-        public Logger()
-        {
-            _jsonDataStore = new DataStore($"{Directory.GetCurrentDirectory()}\\log.db");
-        }
+        private static DataStore _jsonDataStore = new DataStore($"{Directory.GetCurrentDirectory()}\\log.db");
 
-        public void Insert<T>(T input, string collectionName) where T : class
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="input">input to save in collection</param>
+        /// <param name="collectionName">the name of collection something like table (it will be created if not exists)</param>
+        public static void Insert<T>(T input) where T : class
         {
-            var collection = GetCollection<T>(collectionName);
+            var collection = GetCollection<T>();
             collection.InsertOne(input);
         }
 
-        public void InsertMany<T>(List<T> input, string collectionName) where T : class
+        public static void InsertMany<T>(List<T> input) where T : class
         {
-            var collection = GetCollection<T>(collectionName);
+            var collection = GetCollection<T>();
             collection.InsertMany(input);
         }
 
-        public IDocumentCollection<T> GetCollection<T>(string collectionName) where T : class
+        public static IDocumentCollection<T> GetCollection<T>() where T : class
         {
-            var collection = _jsonDataStore.GetCollection<T>(collectionName);
+            var collection = _jsonDataStore.GetCollection<T>();
             return collection;
         }
 
