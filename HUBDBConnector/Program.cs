@@ -11,7 +11,6 @@ using System.Linq;
 namespace HUBDBConnector
 {
 
-    public class mode { public int Id { get; set; } public string name { get; set; } }
     class Program
     {
         static void Main(string[] args)
